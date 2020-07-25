@@ -29,8 +29,8 @@ namespace itertools
             }
             iterator &operator++()
             {
-                ++bIter;
-                ++bIterBool;
+                ++first_val;
+                ++first_flag;
                 while(first_val!=last_val&&!*first_flag)
                 {
                     ++first_val;
