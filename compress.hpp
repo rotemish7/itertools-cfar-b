@@ -15,7 +15,7 @@ namespace itertools
                 const F& container2;
             public:
 
-                compress (T con1,R con2)  : container1(con1), container2(con2) {}
+                compress (T con1,F con2)  : container1(con1), container2(con2) {}
                 class iterator
                 {
                     typename T::iterator first_val1;
