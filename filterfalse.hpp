@@ -1,39 +1,69 @@
 //
 // Created by rotem levy on 11/06/2020.
 //
-
+#pragma once
 #include <iostream>
 using namespace std;
+
 namespace itertools
 {
-    template<typename T> class filterfalse
+    template<typename T, typename F>
+    class filterfalse
     {
-    private:
-
-        class iter {
         private:
-            int at;
+            T cont;
+            F func;
         public:
-            iter(int at) : at(at) /*,prev(0)*/{}
-            bool operator!=(iter const& other) const { return at != other.at; }
-            int const& operator*() const { return at/*+prev*/; }
-            iter& operator++() { /*prev += at;*/ ++at; return *this; }
-        };
+            filterfalse(T c, F f) : cont(c), func(f) {}
 
-        const T& m_container;
-    public:
-        filterfalse(const T& container): m_container(container)
-        {
-        }
-        template<typename K>
-        filterfalse(const T& container, K func): m_container(container) {};
+            class iterator
+            {
+                private:
+                    typename T::iterator first_val;
+                    typename T::iterator last_val;
+                    F func;
+                public:
+                    iterator(typename T::iterator first, typename T::iterator last, F f) : first_val(firsts), last_val(last),
+                                                                                   func(f) {}
 
-        iter begin() {
-            return iter(0);
-        }
+                    bool operator==() { return first_val == other.first_val; }
 
-        iter end() {
-            return iter(2);
-        }
+                    bool operator!=(const iterator &other) const { return first_val != other.first_val; }
+
+                    auto operator*()
+                    {
+                        while (func(*first_val))
+                        {
+                            ++(*this);
+                        }
+                        return first_val;
+                    }
+
+                    //++first_val
+                    iterator operator++()
+                    {
+                        ++first_val;
+                        while (first_val != last_val && func(*first_val))
+                        {
+                            ++first_val;
+                        }
+                        return *this;
+                    }
+
+                    //first_val++
+                    const iterator operator++(int)
+                    {
+                        iterator copy = *this;
+                        ++first_val;
+                        while (first_val != last_val && func(*first_val))
+                        {
+                            ++first_val;
+                        }
+                        return copy;
+                    }
+                };
+
+                iterator begin() { return iterator (cont.begin,cont.begin,func)}
+                iterator end() { return iterator (cont.end,cont.end,func);}
     };
-};
+}
