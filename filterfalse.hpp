@@ -14,7 +14,7 @@ namespace itertools
             T cont;
             F func;
         public:
-            filterfalse(T c, F f) : cont(c), func(f) {}
+            filterfalse(F f, T c) : cont(c), func(f) {}
 
             class iterator
             {
@@ -40,7 +40,7 @@ namespace itertools
                     }
 
                     //++first_val
-                    iterator operator++()
+                   const iterator& operator++()
                     {
                         ++first_val;
                         while (first_val != last_val && func(*first_val))
@@ -51,7 +51,7 @@ namespace itertools
                     }
 
                     //first_val++
-                    const iterator operator++(int)
+                    iterator operator++(int)
                     {
                         iterator copy = *this;
                         ++first_val;
@@ -63,7 +63,7 @@ namespace itertools
                     }
                 };
 
-                iterator begin() { return iterator (cont.begin,cont.begin,func);}
-                iterator end() { return iterator (cont.end,cont.end,func);}
+                iterator begin() { return iterator(cont.begin,cont.end,func);}
+                iterator end() { return iterator(cont.end,cont.end,func);}
     };
 }
