@@ -7,32 +7,33 @@ namespace itertools
 {
     class range
     {
+    public:
+        class iterator
+        {
+            friend class range;
         public:
-            class iterator
+            int operator*() const {return at;}
+            const iterator &operator++() {++at;return *this;}
+            iterator operator++(int)
             {
-                friend class range;
-                private:
-                    int at;
-                public:
-                    iterator(int i) : at(i) {}
-                    int operator*() const { return at;}
-                    bool operator!=(const iterator& other) const { return at != other.at; }
-                    bool operator==(const iterator& other) const {return at == other.at;}
-                    iterator operator++(int)
-                    {
-                        iterator copy = *this;
-                        ++at;
-                        return copy;
-                    }
-                    const iterator& operator++() { ++at; return *this; }
-                };
+                iterator copy(*this);
+                ++at;
+                return copy;
+            }
+            bool operator==(const iterator &other) const { return this->at == other.at; }
 
-                typedef int value_type;
-                range(int first, int last) : first_val(first), last_val(last) {}
-                iterator begin() const { return first_val; }
-                iterator end() const { return last_val; }
+            bool operator!=(const iterator &other) const { return this->at != other.at; }
+        protected:
+            iterator(int i) : at(i) {}
         private:
-            iterator first_val;
-            iterator last_val;
-    };
-}
+            int at;
+        };//class iterator
+        iterator begin() const {return first_val;}
+        iterator end() const {return last_val;}
+        range(int begin, int end) : first_val(begin), last_val(end) {}
+        typedef int	value_type;
+    private:
+        iterator first_val;
+        iterator last_val;
+    }; //class range
+}//namespace itertools

@@ -23,14 +23,18 @@ namespace itertools
             auto operator*()
             {
                 while(func(*first_val))
+                {
                     ++(*this);
+                }
                 return *first_val;
             }
             const iterator &operator++()
             {
                 ++first_val;
                 while(first_val!=last_val&&func(*first_val))
+                {
                     ++first_val;
+                }
                 return *this;
             }
             iterator operator++(int)
@@ -38,7 +42,9 @@ namespace itertools
                 iterator copy=*this;
                 ++first_val;
                 while(first_val!=last_val&&func(*first_val))
+                {
                     ++first_val;
+                }
                 return copy;
             }
             iterator& operator=(const iterator& other)
@@ -51,17 +57,10 @@ namespace itertools
                 }
                 return *this;
             }
-            bool operator==(const iterator &other) const
-            {
-                return this->first_val == other.first_val;
-            }
-            bool operator!=(const iterator &other) const
-            {
-                return this->first_val != other.first_val;
-            }
+            bool operator==(const iterator &other) const {  return this->first_val == other.first_val; }
+            bool operator!=(const iterator &other) const { return this->first_val != other.first_val; }
         };//class iterator
         iterator begin() {return iterator  (cont.begin(),cont.end(),func);}
         iterator end() { return iterator (cont.end(),cont.end(),func); }
-
     }; //class filterfalse
-}//namespace itertools 
+}//namespace itertools

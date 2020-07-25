@@ -24,7 +24,9 @@ namespace itertools
             auto operator*()
             {
                 while(first_val!=last_val&&!*first_flag)
+                {
                     ++(*this);
+                }
                 return *first_val;
             }
             iterator &operator++()
@@ -60,16 +62,10 @@ namespace itertools
                 }
                 return *this;
             }
-            bool operator==(const iterator &other) const
-            {
-                return this->first_val == other.first_val;
-            }
-            bool operator!=(const iterator &other) const
-            {
-                return this->first_val != other.first_val;
-            }
+            bool operator==(const iterator &other) const { return this->first_val == other.first_val; }
+            bool operator!=(const iterator &other) const { return this->first_val != other.first_val; }
         };//class iterator
         iterator begin() {return iterator  (container1.begin(),container1.end(),container2.begin(),container2.end());}
         iterator end() { return iterator (container1.end(),container1.end(),container2.end(),container2.end()); }
     }; //class compress
-}//namespace itertools 
+}//namespace itertools
