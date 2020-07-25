@@ -12,7 +12,7 @@ namespace itertools
     {
             private:
                 const T& container1;
-                const R& container2;
+                const F& container2;
             public:
 
                 compress (T con1,R con2)  : container1(con1), container2(con2) {}
