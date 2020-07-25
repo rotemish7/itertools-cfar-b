@@ -63,7 +63,7 @@ namespace itertools
                     }
                 };
 
-                iterator begin() { return iterator (cont.begin,cont.begin,func)}
+                iterator begin() { return iterator (cont.begin,cont.begin,func);}
                 iterator end() { return iterator (cont.end,cont.end,func);}
     };
 }
