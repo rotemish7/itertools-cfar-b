@@ -23,6 +23,7 @@ namespace itertools
         private:
             const T& cont;
             const F& func;
+            typedef typename T::value_type value_type
         public:
             accumulate(T c, F f=plus()): cont(c), func(f) {};
 
