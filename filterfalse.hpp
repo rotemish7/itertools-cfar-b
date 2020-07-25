@@ -23,7 +23,7 @@ namespace itertools
                     typename T::iterator last_val;
                     F func;
                 public:
-                    iterator(typename T::iterator first, typename T::iterator last, F f) : first_val(firsts), last_val(last),
+                    iterator(typename T::iterator first, typename T::iterator last, F f) : first_val(first), last_val(last),
                                                                                    func(f) {}
 
                     bool operator==(const iterator &other) { return first_val == other.first_val; }
