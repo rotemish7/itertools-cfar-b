@@ -8,8 +8,8 @@ namespace itertools
     class range
     {
         private:
-            int first_val;
-            int last_val;
+            iterator first_val;
+            iterator last_val;
         public:
             class iterator
             {
@@ -17,19 +17,19 @@ namespace itertools
                 private:
                     int at;
                 public:
-                iterator(int i) : at(i) {}
-                int operator*() const { return at;}
-                bool operator!=(const iterator& other) const { return at != other.at; }
-                bool operator==(const iterator& other) const {return at == other.at;}
-                iterator operator++(int)
-                {
-                    iterator copy = *this;
-                    ++at;
-                    return copy;
-                }
-                const iterator& operator++() { ++at; return *this; }
-            };
-            
+                    iterator(int i) : at(i) {}
+                    int operator*() const { return at;}
+                    bool operator!=(const iterator& other) const { return at != other.at; }
+                    bool operator==(const iterator& other) const {return at == other.at;}
+                    iterator operator++(int)
+                    {
+                        iterator copy = *this;
+                        ++at;
+                        return copy;
+                    }
+                    const iterator& operator++() { ++at; return *this; }
+                };
+
             typedef int value_type;
             range(int first, int last) : first_val(first), last_val(last) {}
             iterator begin() const { return first_val; }
