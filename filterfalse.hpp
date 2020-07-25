@@ -2,8 +2,6 @@
 // Created by rotem levy on 11/06/2020.
 //
 #pragma once
-#include <iostream>
-using namespace std;
 
 namespace itertools
 {
@@ -29,7 +27,16 @@ namespace itertools
                     bool operator==(const iterator &other) { return first_val == other.first_val; }
 
                     bool operator!=(const iterator &other) const { return first_val != other.first_val; }
-
+                    iterator& operator=(const iterator& other)
+                    {
+                        if(*this != other)
+                        {
+                            this->last_val = other.last_val;
+                            this->first_val = other.first_val;
+                            this->func = other.func;
+                        }
+                        return *this;
+                    }
                     auto operator*()
                     {
                         while (func(*first_val))
@@ -63,7 +70,7 @@ namespace itertools
                     }
                 };
 
-                iterator begin() { return iterator(cont.begin,cont.end,func);}
-                iterator end() { return iterator(cont.end,cont.end,func);}
+                iterator begin() {return iterator(cont.begin(),cont.end(),func);}
+                iterator end() {return iterator(cont.end(),cont.end(),func);}
     };
 }
