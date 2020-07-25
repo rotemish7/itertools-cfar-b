@@ -7,7 +7,7 @@ using namespace std;
 
 namespace itertools
 {
-    template<typename T,typename R>
+    template<typename T,typename F>
     class compress
     {
             private:
