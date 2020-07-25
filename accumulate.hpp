@@ -52,8 +52,8 @@ namespace itertools
                             result = func(result,*first_val);
                         return copy;
                     }
-                    bool operator==(const iterator &other) const { retrun first_val == other.first_val; }
-                    bool operator!=(const iterator &other) const { retrun first_val != other.first_val; }
+                    bool operator==(const iterator &other) const { return first_val == other.first_val; }
+                    bool operator!=(const iterator &other) const { return first_val != other.first_val; }
             };//class iterator
 
             iterator begin() {return iterator  (cont.begin(),cont.end(),func);}
