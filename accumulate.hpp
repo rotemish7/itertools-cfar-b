@@ -2,12 +2,9 @@
 // Created by rotem levy on 11/06/2020.
 //
 #pragma once
-#include <iostream>
-using namespace std;
 
 namespace itertools
 {
-
     typedef struct
     {
         template <typename P>
@@ -21,8 +18,8 @@ namespace itertools
     class accumulate
     {
         private:
-            const T& cont;
-            const F& func;
+             T cont;
+             F func;
             typedef typename T::value_type value_type;
         public:
             accumulate(T c, F f=plus()): cont(c), func(f) {};
@@ -42,7 +39,9 @@ namespace itertools
                     {
                         ++first_val;
                         if(first_val!=last_val)
+                        {
                             result = func(result,*first_val);
+                        }
                         return *this;
                     }
                     iterator operator++(int)
@@ -50,14 +49,28 @@ namespace itertools
                         iterator copy=*this;
                         ++first_val;
                         if(first_val!=last_val)
+                        {
                             result = func(result,*first_val);
+                        }
                         return copy;
+                    }
+                    
+                    iterator& operator=(const iterator& other)
+                    {
+                        if(*this != other)
+                        {
+                            this->first_val = other.first_val;
+                            this->last_val = other.last_val;
+                            this->func = other.func;
+                            this->result = other.result;
+                        }
+                        return *this;
                     }
                     bool operator==(const iterator &other) const { return first_val == other.first_val; }
                     bool operator!=(const iterator &other) const { return first_val != other.first_val; }
             };//class iterator
 
-            iterator begin() {return iterator  (cont.begin(),cont.end(),func);}
-            iterator end() { return iterator (cont.end(),cont.end(),func); }
+            iterator begin() {return iterator(cont.begin(),cont.end(),func);}
+            iterator end() { return iterator(cont.end(),cont.end(),func);}
     };
 };
