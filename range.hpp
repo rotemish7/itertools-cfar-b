@@ -7,9 +7,6 @@ namespace itertools
 {
     class range
     {
-        private:
-            iterator first_val;
-            iterator last_val;
         public:
             class iterator
             {
@@ -30,9 +27,12 @@ namespace itertools
                     const iterator& operator++() { ++at; return *this; }
                 };
 
-            typedef int value_type;
-            range(int first, int last) : first_val(first), last_val(last) {}
-            iterator begin() const { return first_val; }
-            iterator end() const { return last_val; }
+                typedef int value_type;
+                range(int first, int last) : first_val(first), last_val(last) {}
+                iterator begin() const { return first_val; }
+                iterator end() const { return last_val; }
+        private:
+            iterator first_val;
+            iterator last_val;
     };
-};
+}
