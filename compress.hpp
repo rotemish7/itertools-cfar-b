@@ -7,15 +7,14 @@ using namespace std;
 
 namespace itertools
 {
-    template<typename T,typename F>
+    template<typename T,typename R>
     class compress
     {
             private:
-                const T& container1;
-                const F& container2;
+                T container1;
+                F container2;
             public:
-
-                compress (T con1,F con2)  : container1(con1), container2(con2) {}
+                compress (T c1,F c2)  : container1(c1), container2(c2) {}
                 class iterator
                 {
                     typename T::iterator first_val1;
@@ -27,7 +26,7 @@ namespace itertools
                         iterator(typename T::iterator first1, typename T::iterator last1,typename F::iterator first2, typename F::iterator last2) : first_val1(first1), last_val1(last1),first_val2(first2), last_val2(last2) {}
                          auto operator*()
                         {
-                            while(first_val1!=last_val1&& !*first_val2)
+                            while(first_val1!=last_val1&&!*first_val2)
                             {
                                 ++(*this);
                             }
