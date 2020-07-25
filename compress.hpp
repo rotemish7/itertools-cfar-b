@@ -52,16 +52,16 @@ namespace itertools
                 }
                 return copy;
             }
-            iterator& operator=(const iterator& other)
-            {
-                if (*this != other)
-                {
-                    this->last_val=other.last_val;
-                    this->first_val=other.first_val;
-                    this->func=other.func;
-                }
-                return *this;
-            }
+//            iterator& operator=(const iterator& other)
+//            {
+//                if (*this != other)
+//                {
+//                    this->last_val=other.last_val;
+//                    this->first_val=other.first_val;
+//                    this->func=other.func;
+//                }
+//                return *this;
+//            }
             bool operator==(const iterator &other) const { return this->first_val == other.first_val; }
             bool operator!=(const iterator &other) const { return this->first_val != other.first_val; }
         };//class iterator
